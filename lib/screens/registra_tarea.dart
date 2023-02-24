@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:login2/models/tarea.dart';
+import 'package:login2/screens/etiquetas.dart';
 import 'package:login2/screens/listaTarea.dart';
-
-import '../models/tarea.dart';
-import 'etiquetas.dart';
 
 
 class nuevaTarea extends StatefulWidget {
@@ -122,80 +121,80 @@ class NuevaTareaState extends State<nuevaTarea> {
                   const SizedBox(
                     height: 30,
                   ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 250.0,
-                      height: 100.0,
-                      child: Container(
-                        child: DropdownButtonFormField<String>(
-                          value: value,
-                          items: items.map((e) => DropdownMenuItem<String>(
-                              child: Text(e),
-                              value: e)
-                          ).toList(),
-                          onChanged: (value) {
-                            tipoController.text = value!;
-                            actualizarTarea();
-                          },
-                          decoration: const InputDecoration(
-                            iconColor: Colors.deepPurpleAccent,
-                            labelText: 'Tipo de Tarea', labelStyle: TextStyle(color: Colors.deepPurpleAccent),
-                            prefixIcon: Icon(Icons.category,color: Colors.deepPurpleAccent),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: 250.0,
+                        height: 100.0,
+                        child: Container(
+                          child: DropdownButtonFormField<String>(
+                            value: value,
+                            items: items.map((e) => DropdownMenuItem<String>(
+                                child: Text(e),
+                                value: e)
+                            ).toList(),
+                            onChanged: (value) {
+                              tipoController.text = value!;
+                              actualizarTarea();
+                            },
+                            decoration: const InputDecoration(
+                              iconColor: Colors.deepPurpleAccent,
+                              labelText: 'Tipo de Tarea', labelStyle: TextStyle(color: Colors.deepPurpleAccent),
+                              prefixIcon: Icon(Icons.category,color: Colors.deepPurpleAccent),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                              ),
                             ),
-                          ),
 
+                          ),
                         ),
                       ),
-                    ),
-                    FloatingActionButton(
-                      backgroundColor: Colors.deepPurpleAccent,
-                      onPressed: () {
-                        final route = MaterialPageRoute(
-                            builder: (context) => AgregarEtiquetas());
-                        Navigator.push(context, route);
+                      FloatingActionButton(
+                        backgroundColor: Colors.deepPurpleAccent,
+                        onPressed: () {
+                          final route = MaterialPageRoute(
+                              builder: (context) => AgregarEtiquetas());
+                          Navigator.push(context, route);
 
-                      },
-                      tooltip: 'Gestionar Etiqueta',
-                      child: const Icon(Icons.edit),
-                    ),
-                  ],
+                        },
+                        tooltip: 'Gestionar Etiqueta',
+                        child: const Icon(Icons.edit),
+                      ),
+                    ],
 
-                ),
+                  ),
                   const SizedBox(
                     height: 50,
                   ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      disabledColor: Colors.grey,
-                      color: Colors.deepPurpleAccent,
-                      onPressed: (){
-                        setState(() {
-                          _guardar();
-                        });
-                      },
-                      child: const Text('Guardar',style: TextStyle(color: Colors.white)),
-                    ),
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      disabledColor: Colors.grey,
-                      color: Colors.deepPurpleAccent,
-                      onPressed: (){
-                        Navigator.pop(context);
-                        listaTareasState.actualizarLisView();
-                      },
-                      child: const Text('Cancelar',style: TextStyle(color: Colors.white),),
-                    ),
-                  ],
-                )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      MaterialButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        disabledColor: Colors.grey,
+                        color: Colors.deepPurpleAccent,
+                        onPressed: (){
+                          setState(() {
+                            _guardar();
+                          });
+                        },
+                        child: const Text('Guardar',style: TextStyle(color: Colors.white)),
+                      ),
+                      MaterialButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        disabledColor: Colors.grey,
+                        color: Colors.deepPurpleAccent,
+                        onPressed: (){
+                          Navigator.pop(context);
+                          listaTareasState.actualizarLisView();
+                        },
+                        child: const Text('Cancelar',style: TextStyle(color: Colors.white),),
+                      ),
+                    ],
+                  )
                 ],
               ),
             )

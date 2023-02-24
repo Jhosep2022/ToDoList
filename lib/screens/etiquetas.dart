@@ -10,15 +10,15 @@ class AgregarEtiquetas extends StatefulWidget {
 
 class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
   List<gesetiqueta> listaetiqueta = [];
+  TextEditingController etiquetaController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: Text('GESTIONAR ETIQUETA',style: TextStyle(
+          title: const Text('GESTIONAR ETIQUETA',style: TextStyle(
             fontFamily: 'PermanentMarker',
-
-          ) ,),
+          )),
           backgroundColor: Colors.deepPurpleAccent,
         ),
         body: ListView.builder(
@@ -29,7 +29,19 @@ class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
               child: Row(children: [
                 Expanded(
                   flex: 9,
-                  //child: TextField(controller: listaetiqueta[index].name)),
+                  child: TextField(
+                      controller: etiquetaController,
+                      autocorrect: false,
+                      decoration: const InputDecoration(
+                        labelText:'Etiqueta',
+                        hintText:'Ejemplo: Trabajo',
+                        prefixIcon: Icon(Icons.add_task),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                      ),
+                  )
+                ),
                 Expanded(
                     flex: 2,
                     child: FloatingActionButton(
@@ -37,7 +49,6 @@ class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
                       onPressed: () => _remove(index),
                       child: const Icon(Icons.delete)
                     )),
-
               ]),
             );
           },
@@ -50,7 +61,9 @@ class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
               child: const Icon(Icons.add)),
           FloatingActionButton(
             backgroundColor: Colors.deepPurpleAccent,
-            onPressed: _get,
+            onPressed: () => () {
+
+            },//_get,
             child: const Icon(Icons.save)
           ),
         ]));
@@ -58,19 +71,10 @@ class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
 
   void _add() {
     setState(() {
-      listaetiqueta.add(gesetiqueta());
+      listaetiqueta.add(gesetiqueta(etiquetaController.text));
     });
   }
 
-  void _get() {
-    for (var i = 0; i < listaetiqueta.length; i++) {
-      print("Campo de texto:");
-      //print(listaetiqueta[i].name.text);
-      print("Campo de select:");
-      print(listaetiqueta[i]._selectedValue);
-      print("--------------------------------");
-    }
-  }
 
   void _remove(int index) {
     setState(() {

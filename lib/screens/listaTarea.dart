@@ -71,9 +71,9 @@ class ListaTareasState extends State<ListaTareas> {
   }
   void _crearTarea(ListaTareasState obj){
     Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => nuevaTarea(Tarea(" "," "," "," "), 'Nueva Tarea', obj)));
-      actualizarLisView();
+        context,
+        MaterialPageRoute(builder: (context) => nuevaTarea(Tarea(" "," "," "," "), 'Nueva Tarea', obj)));
+    actualizarLisView();
   }
 
   void _editaTarea(Tarea tarea, ListaTareasState obj, int posicion) {
