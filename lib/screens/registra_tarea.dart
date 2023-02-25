@@ -28,7 +28,7 @@ class NuevaTareaState extends State<nuevaTarea> {
   TextEditingController tareaController = TextEditingController();
   TextEditingController tipoController = TextEditingController();
   TextEditingController _date = TextEditingController();
-  final items = ['Trabajo', 'Casa', 'Personal'];
+  List<String> items = ['Trabajo', 'Casa', 'Personal'];
   String? value = 'Trabajo';
 
 
@@ -106,7 +106,9 @@ class NuevaTareaState extends State<nuevaTarea> {
                             context: context,
                             initialDate: DateTime.now(),
                             firstDate: DateTime(2000),
-                            lastDate: DateTime(2100));
+                            lastDate: DateTime(2100)
+                        );
+
                         if(pickeddate != null){
                           setState(() {
                             _date.text = pickeddate.toString();
@@ -134,7 +136,11 @@ class NuevaTareaState extends State<nuevaTarea> {
                                 child: Text(e),
                                 value: e)
                             ).toList(),
-                            onChanged: (value) {
+                            onChanged: (String? newvalue) {
+                              setState(() {
+                                value = newvalue;
+
+                              });
                               tipoController.text = value!;
                               actualizarTarea();
                             },
@@ -151,6 +157,7 @@ class NuevaTareaState extends State<nuevaTarea> {
                         ),
                       ),
                       FloatingActionButton(
+
                         backgroundColor: Colors.deepPurpleAccent,
                         onPressed: () {
                           final route = MaterialPageRoute(
@@ -202,6 +209,7 @@ class NuevaTareaState extends State<nuevaTarea> {
       ),
     );
   }
+
   void _guardar(){
     tarea.estado ="";
     if (_estaEditando()){

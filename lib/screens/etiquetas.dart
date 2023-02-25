@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:login2/models/tipotarea.dart';
+import 'package:login2/models/tarea.dart';
+
+
 
 class AgregarEtiquetas extends StatefulWidget {
-  const AgregarEtiquetas({Key? key}) : super(key: key);
+  final gesetiqueta listaetiqueta;
+  final String appbarTitle;
+  int position;
+
+  AgregarEtiquetas(this.listaetiqueta, this.appbarTitle, [this.position = -1]);
 
   @override
   State<AgregarEtiquetas> createState() => _AgregarEtiquetasState();
@@ -61,12 +67,18 @@ class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
               child: const Icon(Icons.add)),
           FloatingActionButton(
             backgroundColor: Colors.deepPurpleAccent,
-            onPressed: () => () {
-
-            },//_get,
+              onPressed: (){
+                setState(() {
+                  _guardar();
+                });
+              },
             child: const Icon(Icons.save)
           ),
         ]));
+  }
+  void _guardar(){
+    listaetiqueta.tipoetiqueta = etiquetaController.text;
+    Navigator.pop(context, listaetiqueta);
   }
 
   void _add() {
