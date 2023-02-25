@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:login2/models/tarea.dart';
+import 'package:login2/models/etiquetas.dart';
+
 
 
 
 class AgregarEtiquetas extends StatefulWidget {
-  final gesetiqueta listaetiqueta;
-  final String appbarTitle;
-  int position;
-
-  AgregarEtiquetas(this.listaetiqueta, this.appbarTitle, [this.position = -1]);
+  late eti listaetiqueta;
+  late String appbarTitle;
+  late int position;
 
   @override
   State<AgregarEtiquetas> createState() => _AgregarEtiquetasState();
 }
 
 class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
-  List<gesetiqueta> listaetiqueta = [];
+  List<eti> listaetiqueta = [];
   TextEditingController etiquetaController = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -70,6 +69,7 @@ class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
               onPressed: (){
                 setState(() {
                   _guardar();
+
                 });
               },
             child: const Icon(Icons.save)
@@ -77,13 +77,15 @@ class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
         ]));
   }
   void _guardar(){
-    listaetiqueta.tipoetiqueta = etiquetaController.text;
+    listaetiqueta.add(eti(etiquetaController.text));
+
     Navigator.pop(context, listaetiqueta);
+    print(listaetiqueta);
   }
 
   void _add() {
     setState(() {
-      listaetiqueta.add(gesetiqueta(etiquetaController.text));
+      listaetiqueta.add(eti(etiquetaController.text));
     });
   }
 
@@ -91,7 +93,8 @@ class _AgregarEtiquetasState extends State<AgregarEtiquetas> {
   void _remove(int index) {
     setState(() {
       listaetiqueta.removeAt(index);
-    });
-  }
+      });
+    }
 }
+
 

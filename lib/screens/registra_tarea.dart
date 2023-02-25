@@ -28,7 +28,7 @@ class NuevaTareaState extends State<nuevaTarea> {
   TextEditingController tareaController = TextEditingController();
   TextEditingController tipoController = TextEditingController();
   TextEditingController _date = TextEditingController();
-  List<String> items = ['Trabajo', 'Casa', 'Personal'];
+  List<String> items = ['Trabajo', 'Casa', 'Personal', 'Estudio'];
   String? value = 'Trabajo';
 
 
@@ -136,9 +136,9 @@ class NuevaTareaState extends State<nuevaTarea> {
                                 child: Text(e),
                                 value: e)
                             ).toList(),
-                            onChanged: (String? newvalue) {
+                            onChanged: (String? value) {
                               setState(() {
-                                value = newvalue;
+                                value = value;
 
                               });
                               tipoController.text = value!;
@@ -161,7 +161,7 @@ class NuevaTareaState extends State<nuevaTarea> {
                         backgroundColor: Colors.deepPurpleAccent,
                         onPressed: () {
                           final route = MaterialPageRoute(
-                              builder: (context) => AgregarEtiquetas());
+                              builder: (context) => AgregarEtiquetas( ));
                           Navigator.push(context, route);
 
                         },
@@ -220,6 +220,7 @@ class NuevaTareaState extends State<nuevaTarea> {
     tarea.nombre = tareaController.text;
     tarea.tipotarea = tipoController.text;
     tarea.tiempo = _date.text;
+
 
     if (_comprobarCampos()){
       if (!_estaEditando()) {
