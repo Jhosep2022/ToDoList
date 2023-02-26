@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:login2/models/tarea.dart';
-import 'package:login2/screens/etiquetas.dart';
 import 'package:login2/screens/listaTarea.dart';
+
+import '../models/tarea.dart';
+import 'etiquetas.dart';
 
 
 class nuevaTarea extends StatefulWidget {
@@ -28,7 +29,7 @@ class NuevaTareaState extends State<nuevaTarea> {
   TextEditingController tareaController = TextEditingController();
   TextEditingController tipoController = TextEditingController();
   TextEditingController _date = TextEditingController();
-  List<String> items = ['Trabajo', 'Casa', 'Personal', 'Estudio'];
+  final items = ['Trabajo', 'Casa', 'Personal', 'Estudio'];
   String? value = 'Trabajo';
 
 
@@ -106,12 +107,12 @@ class NuevaTareaState extends State<nuevaTarea> {
                             context: context,
                             initialDate: DateTime.now(),
                             firstDate: DateTime(2000),
-                            lastDate: DateTime(2100)
-                        );
-
+                            lastDate: DateTime(2100));
                         if(pickeddate != null){
                           setState(() {
                             _date.text = pickeddate.toString();
+                            final splitted = _date.text.split(' ');
+                            _date.text=splitted[0];
                           });
                         }
                       },
@@ -136,11 +137,7 @@ class NuevaTareaState extends State<nuevaTarea> {
                                 child: Text(e),
                                 value: e)
                             ).toList(),
-                            onChanged: (String? value) {
-                              setState(() {
-                                value = value;
-
-                              });
+                            onChanged: (value) {
                               tipoController.text = value!;
                               actualizarTarea();
                             },
@@ -157,11 +154,10 @@ class NuevaTareaState extends State<nuevaTarea> {
                         ),
                       ),
                       FloatingActionButton(
-
                         backgroundColor: Colors.deepPurpleAccent,
                         onPressed: () {
                           final route = MaterialPageRoute(
-                              builder: (context) => AgregarEtiquetas( ));
+                              builder: (context) => AgregarEtiquetas());
                           Navigator.push(context, route);
 
                         },
@@ -184,6 +180,7 @@ class NuevaTareaState extends State<nuevaTarea> {
                         color: Colors.deepPurpleAccent,
                         onPressed: (){
                           setState(() {
+
                             _guardar();
                           });
                         },
@@ -209,7 +206,6 @@ class NuevaTareaState extends State<nuevaTarea> {
       ),
     );
   }
-
   void _guardar(){
     tarea.estado ="";
     if (_estaEditando()){
@@ -220,7 +216,6 @@ class NuevaTareaState extends State<nuevaTarea> {
     tarea.nombre = tareaController.text;
     tarea.tipotarea = tipoController.text;
     tarea.tiempo = _date.text;
-
 
     if (_comprobarCampos()){
       if (!_estaEditando()) {
@@ -264,4 +259,3 @@ class NuevaTareaState extends State<nuevaTarea> {
     return editando;
   }
 }
-
