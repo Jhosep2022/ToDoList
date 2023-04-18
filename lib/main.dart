@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login2/providers/usuario_provider.dart';
+
 import 'package:login2/screens/listaTarea.dart';
 import 'package:login2/screens/login_screens.dart';
 import 'package:provider/provider.dart';
@@ -11,17 +11,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => Usuario_provider())],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Material App',
-        routes: {
-          'Login': (_) => Login(),
-          'Home': (_) => ListaTareas(),
-        },
-        initialRoute: 'Login',
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Material App',
+      routes: {
+        'Login': (_) => Login(),
+        'Home': (_) => ListaTareas(),
+      },
+      initialRoute: 'Login',
     );
   }
 }

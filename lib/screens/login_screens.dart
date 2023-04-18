@@ -1,7 +1,5 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/usuario_provider.dart';
 import '../widgets/input_decoration.dart';
 import 'listaTarea.dart';
 
@@ -28,7 +26,6 @@ class Login extends StatelessWidget {
   }
 
   SingleChildScrollView loginfrom(BuildContext context) {
-    final usuarioProvider = Provider.of<Usuario_provider>(context);
     var txtCorreo = TextEditingController();
     var txtPasssword = TextEditingController();
     return SingleChildScrollView(
@@ -128,7 +125,7 @@ class Login extends StatelessWidget {
           const SizedBox(
             height: 50,
           ),
-          Text(
+          const Text(
             'Crear una nueva cuenta',
             style: TextStyle(
                 fontSize: 18,
